@@ -1,0 +1,27 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\standard"
+  },
+  {
+    "Sourcefile": "D:\\Works\\task_arduino_5_1_\\build\\sketch\\test_cup.ino.cpp",
+    "Include": "DS1302.h",
+    "Includepath": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\arduino-ds1302-master"
+  },
+  {
+    "Sourcefile": "D:\\Works\\task_arduino_5_1_\\build\\sketch\\test_cup.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\arduino-ds1302-master\\DS1302.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]
