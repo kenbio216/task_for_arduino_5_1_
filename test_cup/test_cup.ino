@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <DS1302.h>
-
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
 
 //值日表：小一、小二、小明、小四、小五、小六、小七
+#define OLED_RESET     4
+Adafruit_SSD1306 display(128, 64, &Wire,OLED_RESET);
 
 namespace {
 
@@ -49,6 +50,21 @@ void printTime() {
 
 void setup() {
   Serial.begin(9600);
+
+  display.begin(SSD1306_SWITCHCAPVCC,0x3C);
+  display.setTextColor(WHITE);//开像素点发光
+  display.clearDisplay();//清屏
+  
+  display.setTextSize(1); //设置字体大小  
+  display.setCursor(35, 5);//设置显示位置
+  display.println("-TonyCode-");
+ 
+  display.setTextSize(2);//设置字体大小  
+  display.setCursor(15, 30);//设置显示位置
+  display.println("OLED TEST");
+  
+  display.display(); // 开显示
+
 
 //再次上传时屏蔽此代码
 //  rtc.writeProtect(false);
