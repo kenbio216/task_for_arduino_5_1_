@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <DS1302.h>
 
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
 
 //值日表：小一、小二、小明、小四、小五、小六、小七
 

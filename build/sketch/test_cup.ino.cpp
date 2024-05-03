@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <DS1302.h>
 
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
 
 //值日表：小一、小二、小明、小四、小五、小六、小七
 
@@ -45,11 +49,11 @@ void printTime() {
 
 }  // namespace
 
-#line 46 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
+#line 50 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
 void setup();
-#line 57 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
+#line 61 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
 void loop();
-#line 46 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
+#line 50 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
 void setup() {
   Serial.begin(9600);
 

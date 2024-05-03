@@ -2,6 +2,10 @@
 # 2 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
 # 3 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
 
+# 5 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
+# 6 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
+# 7 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
+
 
 //值日表：小一、小二、小明、小四、小五、小六、小七
 
