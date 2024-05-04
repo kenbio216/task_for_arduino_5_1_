@@ -76,9 +76,11 @@ namespace
 void setup()
 {
   Serial.begin(9600);
+
+  
   title();
   pinMode(BUTTON, INPUT_PULLUP);
-  attachInterrupt(0, change, FALLING);//下降沿触发中断0，调用change函数
+  attachInterrupt(0, change, FALLING); // 下降沿触发中断0，调用change函数
 
   // 再次上传时屏蔽此代码
   // rtc.writeProtect(false);
@@ -96,27 +98,24 @@ void loop()
 
 void change()
 {
-    if (i <= 7)
-    {
+  if (i <= 7)
+  {
 
-      display.setTextSize(2);    // 设置字体大小
-      display.setCursor(15, 30); // 设置显示位置
+    display.setTextSize(2);    // 设置字体大小
+    display.setCursor(15, 30); // 设置显示位置
 
-      display.println(list[i]);
-      display.display(); // 开显示
-      i++;
-    }
-    else
-    {
-      i = 1;
+    display.println(list[i]);
+    display.display(); // 开显示
+    i++;
+  }
+  else
+  {
+    i = 1;
 
-      display.setTextSize(2);    // 设置字体大小
-      display.setCursor(15, 30); // 设置显示位置
-      
-      display.println(list[0]);
-      display.display(); // 开显示
-    }
+    display.setTextSize(2);    // 设置字体大小
+    display.setCursor(15, 30); // 设置显示位置
+
+    display.println(list[0]);
+    display.display(); // 开显示
+  }
 }
-  
-
-  
