@@ -1,3 +1,5 @@
 .vscode/*
 build/*
 s_build/*
+.vscode
+s_build
