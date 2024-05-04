@@ -1,5 +1,9 @@
 {
     "board": "arduino:avr:uno",
     "sketch": "test_cup\\test_cup.ino",
+<<<<<<< HEAD
     "output": "./s_build"
+=======
+    "output": "./build"
+>>>>>>> e8f2569963ed28c078fee58b8492bed8192afeaf
 }
