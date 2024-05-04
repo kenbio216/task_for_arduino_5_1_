@@ -1,4 +1,4 @@
-d:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_SSD1306\Adafruit_SSD1306.cpp.o: \
+D:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_SSD1306\Adafruit_SSD1306.cpp.o: \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_SSD1306\Adafruit_SSD1306.cpp \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_SSD1306\Adafruit_SSD1306.h \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library/Adafruit_GFX.h \

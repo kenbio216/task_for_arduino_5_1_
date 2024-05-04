@@ -3,77 +3,120 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+// 值日表：小一、小二、小明、小四、小五、小六、小七
+char list[7][20] = {"A1", "B2", "C3", "D4", "E5", "F6", "G7"};
 
-//值日表：小一、小二、小明、小四、小五、小六、小七
-#define OLED_RESET     4
-Adafruit_SSD1306 display(128, 64, &Wire,OLED_RESET);
+#define OLED_RESET 4
+Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
 
-namespace {
+#define BUTTON 2 // 定义按键
 
-const int kCePin   = 2;  // Chip Enable
-const int kIoPin   = 3;  // Input/Output
-const int kSclkPin = 4;  // Serial Clock
+int i = 0;
 
-DS1302 rtc(kCePin, kIoPin, kSclkPin);
+namespace
+{
 
-String dayAsString(const Time::Day day) {
-  switch (day) {
-    case Time::kSunday: return "Sunday";
-    case Time::kMonday: return "Monday";
-    case Time::kTuesday: return "Tuesday";
-    case Time::kWednesday: return "Wednesday";
-    case Time::kThursday: return "Thursday";
-    case Time::kFriday: return "Friday";
-    case Time::kSaturday: return "Saturday";
+  const int kCePin = 5;   // Chip Enable
+  const int kIoPin = 6;   // Input/Output
+  const int kSclkPin = 7; // Serial Clock
+
+  DS1302 rtc(kCePin, kIoPin, kSclkPin);
+
+  String dayAsString(const Time::Day day)
+  {
+    switch (day)
+    {
+    case Time::kSunday:
+      return "Sunday";
+    case Time::kMonday:
+      return "Monday";
+    case Time::kTuesday:
+      return "Tuesday";
+    case Time::kWednesday:
+      return "Wednesday";
+    case Time::kThursday:
+      return "Thursday";
+    case Time::kFriday:
+      return "Friday";
+    case Time::kSaturday:
+      return "Saturday";
+    }
+    return "(unknown day)";
   }
-  return "(unknown day)";
-}
 
+  void printTime()
+  {
+    Time t = rtc.time();
 
+    const String day = dayAsString(t.day);
 
-void printTime() {
-  Time t = rtc.time();
+    char buf[50];
+    snprintf(buf, sizeof(buf), "%s %04d-%02d-%02d %02d:%02d:%02d",
+             day.c_str(),
+             t.yr, t.mon, t.date,
+             t.hr, t.min, t.sec);
 
-  const String day = dayAsString(t.day);
+    Serial.println(buf);
+  }
 
-  char buf[50];
-  snprintf(buf, sizeof(buf), "%s %04d-%02d-%02d %02d:%02d:%02d",
-           day.c_str(),
-           t.yr, t.mon, t.date,
-           t.hr, t.min, t.sec);
+  void title()
+  {
+    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+    display.setTextColor(WHITE); // 开像素点发光
+    display.clearDisplay();      // 清屏
 
-  Serial.println(buf);
-}
+    display.setTextSize(2);  // 设置字体大小
+    display.setCursor(1, 1); // 设置显示位置
+    display.println("-NameList-");
 
-}  // namespace
+    display.display(); // 开显示
+  }
+} // namespace
 
-void setup() {
+void setup()
+{
   Serial.begin(9600);
+  title();
+  pinMode(BUTTON, INPUT_PULLUP);
+  attachInterrupt(0, change, FALLING);//下降沿触发中断0，调用change函数
 
-  display.begin(SSD1306_SWITCHCAPVCC,0x3C);
-  display.setTextColor(WHITE);//开像素点发光
-  display.clearDisplay();//清屏
-  
-  display.setTextSize(1); //设置字体大小  
-  display.setCursor(35, 5);//设置显示位置
-  display.println("-TonyCode-");
- 
-  display.setTextSize(2);//设置字体大小  
-  display.setCursor(15, 30);//设置显示位置
-  display.println("OLED TEST");
-  
-  display.display(); // 开显示
-
-
-//再次上传时屏蔽此代码
-//  rtc.writeProtect(false);
-//  rtc.halt(false);
-//  Time t(2024, 5, 1, 00, 00, 00, Time::kWednesday);
-//  rtc.time(t);
+  // 再次上传时屏蔽此代码
+  // rtc.writeProtect(false);
+  // rtc.halt(false);
+  // Time t(2024, 5, 1, 00, 00, 00, Time::kWednesday);
+  // rtc.time(t);
 }
 
 // Loop and print the time every second.
-void loop() {
+void loop()
+{
   printTime();
   delay(1000);
 }
+
+void change()
+{
+    if (i <= 7)
+    {
+
+      display.setTextSize(2);    // 设置字体大小
+      display.setCursor(15, 30); // 设置显示位置
+
+      display.println(list[i]);
+      display.display(); // 开显示
+      i++;
+    }
+    else
+    {
+      i = 1;
+
+      display.setTextSize(2);    // 设置字体大小
+      display.setCursor(15, 30); // 设置显示位置
+      
+      display.println(list[0]);
+      display.display(); // 开显示
+    }
+}
+  
+
+  

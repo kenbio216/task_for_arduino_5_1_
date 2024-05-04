@@ -1,4 +1,4 @@
-d:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_GFX_Library\Adafruit_GrayOLED.cpp.o: \
+D:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_GFX_Library\Adafruit_GrayOLED.cpp.o: \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library\Adafruit_GrayOLED.cpp \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library\Adafruit_GrayOLED.h \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library/Adafruit_GFX.h \

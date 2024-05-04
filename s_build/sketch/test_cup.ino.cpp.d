@@ -1,5 +1,5 @@
-d:\Works\task_arduino_5_1_\s_build\sketch\test_cup.ino.cpp.o: \
- d:\Works\task_arduino_5_1_\s_build\sketch\test_cup.ino.cpp \
+D:\Works\task_arduino_5_1_\s_build\sketch\test_cup.ino.cpp.o: \
+ D:\Works\task_arduino_5_1_\s_build\sketch\test_cup.ino.cpp \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/binary.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/WCharacter.h \

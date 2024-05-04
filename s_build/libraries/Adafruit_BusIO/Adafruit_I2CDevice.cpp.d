@@ -1,4 +1,4 @@
-d:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_BusIO\Adafruit_I2CDevice.cpp.o: \
+D:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_BusIO\Adafruit_I2CDevice.cpp.o: \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_BusIO\Adafruit_I2CDevice.cpp \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_BusIO\Adafruit_I2CDevice.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \

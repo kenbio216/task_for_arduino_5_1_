@@ -1,4 +1,4 @@
-d:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_GFX_Library\Adafruit_SPITFT.cpp.o: \
+D:\Works\task_arduino_5_1_\s_build\libraries\Adafruit_GFX_Library\Adafruit_SPITFT.cpp.o: \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library\Adafruit_SPITFT.cpp \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library\Adafruit_SPITFT.h \
  D:\software\OneDrive\ÎÄµµ\Arduino\libraries\Adafruit_GFX_Library\Adafruit_GFX.h \
