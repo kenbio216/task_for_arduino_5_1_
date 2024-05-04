@@ -1,6 +1,5 @@
 {
-    "sketch": "test_cup\\test_cup.ino",
     "board": "arduino:avr:uno",
-    "port": "COM9",
-    "output": "./build"
+    "sketch": "test_cup\\test_cup.ino",
+    "output": "./s_build",
 }

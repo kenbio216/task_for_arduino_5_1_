@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
 #include <DS1302.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
@@ -47,6 +49,11 @@ void printTime() {
 
 }  // namespace
 
+#line 50 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
+void setup();
+#line 76 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
+void loop();
+#line 50 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
 void setup() {
   Serial.begin(9600);
 

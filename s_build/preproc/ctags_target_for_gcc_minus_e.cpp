@@ -1,18 +1,19 @@
-#include <DS1302.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+# 1 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino"
+# 2 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
+# 3 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
+# 4 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
+# 5 "D:\\Works\\task_arduino_5_1_\\test_cup\\test_cup.ino" 2
 
 
 //值日表：小一、小二、小明、小四、小五、小六、小七
-#define OLED_RESET     4
-Adafruit_SSD1306 display(128, 64, &Wire,OLED_RESET);
+
+Adafruit_SSD1306 display(128, 64, &Wire,4);
 
 namespace {
 
-const int kCePin   = 2;  // Chip Enable
-const int kIoPin   = 3;  // Input/Output
-const int kSclkPin = 4;  // Serial Clock
+const int kCePin = 2; // Chip Enable
+const int kIoPin = 3; // Input/Output
+const int kSclkPin = 4; // Serial Clock
 
 DS1302 rtc(kCePin, kIoPin, kSclkPin);
 
@@ -45,23 +46,23 @@ void printTime() {
   Serial.println(buf);
 }
 
-}  // namespace
+} // namespace
 
 void setup() {
   Serial.begin(9600);
 
-  display.begin(SSD1306_SWITCHCAPVCC,0x3C);
-  display.setTextColor(WHITE);//开像素点发光
+  display.begin(0x02 /*|< Gen. display voltage from 3.3V*/,0x3C);
+  display.setTextColor(1 /*|< Draw 'on' pixels*/ /*|< Draw 'on' pixels*/);//开像素点发光
   display.clearDisplay();//清屏
-  
+
   display.setTextSize(1); //设置字体大小  
   display.setCursor(35, 5);//设置显示位置
   display.println("-TonyCode-");
- 
+
   display.setTextSize(2);//设置字体大小  
   display.setCursor(15, 30);//设置显示位置
   display.println("OLED TEST");
-  
+
   display.display(); // 开显示
 
 
