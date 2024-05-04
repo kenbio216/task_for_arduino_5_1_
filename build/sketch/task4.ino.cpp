@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino"
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -16,6 +18,11 @@ Servo myservo; // 创建 Servo 对象
 // 课表
 char list[7][20] = {"A1", "B2", "C3", "D4", "E5", "F6", "G7"};
 
+#line 19 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino"
+void setup();
+#line 27 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino"
+void loop();
+#line 19 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino"
 void setup() 
 {
   Serial.begin(9600);
@@ -49,4 +56,5 @@ void loop() {
 
   delay(100); // 等待一段时间后再次检测
 }
+
 
