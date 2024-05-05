@@ -18,12 +18,12 @@
             "includePath": [
                 "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino",
                 "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\standard",
+                "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src",
                 "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Wire\\src",
                 "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Adafruit_GFX_Library",
                 "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Adafruit_BusIO",
                 "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\SPI\\src",
                 "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Adafruit_SSD1306",
-                "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src",
                 "c:\\users\\hm\\appdata\\local\\arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\lib\\gcc\\avr\\7.3.0\\include",
                 "c:\\users\\hm\\appdata\\local\\arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\lib\\gcc\\avr\\7.3.0\\include-fixed",
                 "c:\\users\\hm\\appdata\\local\\arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\\avr\\include"

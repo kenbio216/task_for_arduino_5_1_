@@ -1,5 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "sketch": "task4\\task4.ino",
-    "output":"./build"
+    "output": "./build",
+    "port": "COM3"
 }

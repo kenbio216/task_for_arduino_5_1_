@@ -11,6 +11,8 @@ D:\Works\task_arduino_5_1_\build\sketch\task4.ino.cpp.o: \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/USBAPI.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\variants\standard/pins_arduino.h \
+ D:\software\OneDrive\文档\Arduino\libraries\Servo\src/Servo.h \
+ D:\software\OneDrive\文档\Arduino\libraries\Servo\src/avr/ServoTimers.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\Wire\src/Wire.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Stream.h \
  D:\software\OneDrive\文档\Arduino\libraries\Adafruit_GFX_Library/Adafruit_GFX.h \
@@ -19,6 +21,4 @@ D:\Works\task_arduino_5_1_\build\sketch\task4.ino.cpp.o: \
  D:\software\OneDrive\文档\Arduino\libraries\Adafruit_BusIO/Adafruit_I2CDevice.h \
  D:\software\OneDrive\文档\Arduino\libraries\Adafruit_BusIO/Adafruit_SPIDevice.h \
  C:\Users\hm\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\src/SPI.h \
- D:\software\OneDrive\文档\Arduino\libraries\Adafruit_SSD1306/Adafruit_SSD1306.h \
- D:\software\OneDrive\文档\Arduino\libraries\Servo\src/Servo.h \
- D:\software\OneDrive\文档\Arduino\libraries\Servo\src/avr/ServoTimers.h
+ D:\software\OneDrive\文档\Arduino\libraries\Adafruit_SSD1306/Adafruit_SSD1306.h

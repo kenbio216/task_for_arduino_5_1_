@@ -11,6 +11,11 @@
   },
   {
     "Sourcefile": "D:\\Works\\task_arduino_5_1_\\build\\sketch\\task4.ino.cpp",
+    "Include": "Servo.h",
+    "Includepath": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src"
+  },
+  {
+    "Sourcefile": "D:\\Works\\task_arduino_5_1_\\build\\sketch\\task4.ino.cpp",
     "Include": "Wire.h",
     "Includepath": "C:\\Users\\hm\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\libraries\\Wire\\src"
   },
@@ -36,11 +41,46 @@
   },
   {
     "Sourcefile": "D:\\Works\\task_arduino_5_1_\\build\\sketch\\task4.ino.cpp",
-    "Include": "Servo.h",
-    "Includepath": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src"
+    "Include": "",
+    "Includepath": null
   },
   {
-    "Sourcefile": "D:\\Works\\task_arduino_5_1_\\build\\sketch\\task4.ino.cpp",
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\avr\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\mbed\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\megaavr\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\nrf52\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\renesas\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\sam\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\samd\\Servo.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\stm32f4\\Servo.cpp",
     "Include": "",
     "Includepath": null
   },
@@ -96,46 +136,6 @@
   },
   {
     "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Adafruit_SSD1306\\Adafruit_SSD1306.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\avr\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\mbed\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\megaavr\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\nrf52\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\renesas\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\sam\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\samd\\Servo.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\software\\OneDrive\\文档\\Arduino\\libraries\\Servo\\src\\stm32f4\\Servo.cpp",
     "Include": "",
     "Includepath": null
   }
