@@ -4,9 +4,9 @@
  * @LastEditors: xuyang
  * @LastEditTime: 2024-05-05 18:49:32
  * @FilePath: \task_for_arduino_5_1_\task9_SmartMedicalBox\task9_SmartMedicalBox.ino
- * @Description: 
- * 
- * Copyright (c) 2024 by xuyang, All Rights Reserved 
+ * @Description:
+ *
+ * Copyright (c) 2024 by xuyang, All Rights Reserved
  */
 
 #include <Servo.h>
