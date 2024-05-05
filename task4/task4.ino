@@ -51,6 +51,8 @@ void oled_showlist(int index)
     display.display(); // 开显示
 }
 
+
+
 #define BUTTON 3                       // 定义按键
 volatile boolean debounceFlag = false; // 去抖标志位
 volatile int i = 0;
