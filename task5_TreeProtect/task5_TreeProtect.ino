@@ -1,13 +1,3 @@
-/*
- * @Author: xuyang
- * @Date: 2024-05-04 20:30:46
- * @LastEditors: xuyang
- * @LastEditTime: 2024-05-05 15:09:39
- * @FilePath: \task_for_arduino_5_1_\task5_TreeProtect\task5_TreeProtect.ino
- * @Description:
- *
- * Copyright (c) 2024 by xuyang, All Rights Reserved
- */
 
 /* -------------------------------------------------------------------------- */
 /*                                   烟雾传感器部分                                  */
