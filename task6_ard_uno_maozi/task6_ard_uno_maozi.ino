@@ -2,8 +2,8 @@
  * @Author: xuyang
  * @Date: 2024-04-26 22:10:01
  * @LastEditors: xuyang
- * @LastEditTime: 2024-04-26 23:05:36
- * @FilePath: \jin_arduino\ard_uno_maozi\ard_uno_maozi.ino
+ * @LastEditTime: 2024-05-05 14:47:11
+ * @FilePath: \task_for_arduino_5_1_\task6_ard_uno_maozi\task6_ard_uno_maozi.ino
  * @Description:
  *
  * Copyright (c) 2024 by xuyang, All Rights Reserved
@@ -13,9 +13,10 @@
 Servo myservo;
 int pos = 0;
 
-const int ldrPin = A0;  // 定义光敏电阻的引脚
-const int servoPin = 9; // 定义SG90的引脚
-const int beepPin = 7;  // 定义蜂鸣器引脚
+const int ldrPin = A0;    // 定义光敏电阻的引脚
+const int servoPin = 9;   // 定义SG90的引脚
+const int beepPin = 7;    // 定义蜂鸣器引脚
+const int beepPinGND = 4; // 定义蜂鸣器引脚
 
 void sweep() // 让舵机旋转
 {
@@ -34,8 +35,12 @@ void sweep() // 让舵机旋转
 void setup()
 {
     pinMode(ldrPin, INPUT);
-    Serial.begin(9600);       // 设置串口波特率为9600
-    pinMode(beepPin, OUTPUT); // 蜂鸣器引脚设置成输出模式
+    Serial.begin(115200);
+    pinMode(beepPin, OUTPUT);   // 蜂鸣器引脚设置成输出模式
+    digitalWrite(beepPin, LOW); // 蜂鸣器停止工作
+
+    pinMode(beepPinGND, OUTPUT);
+    digitalWrite(beepPinGND, LOW);
     myservo.attach(9);
     Serial.println("设备上线！");
 }
