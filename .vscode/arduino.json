@@ -1,0 +1,5 @@
+{
+    "sketch": "task8_MedicinalHerbTemperature\\task8_MedicinalHerbTemperature.ino",
+    "board": "arduino:avr:uno",
+    "port": "COM3"
+}
