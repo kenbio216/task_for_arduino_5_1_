@@ -1,5 +1,5 @@
-E:\win_code_git\task_for_arduino_5_1_\build\core\main.cpp.o: \
- C:\Users\xuyang\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\main.cpp \
+E:\win_code_git\task_for_arduino_5_1_\build\sketch\task5_TreeProtect.ino.cpp.o: \
+ E:\win_code_git\task_for_arduino_5_1_\build\sketch\task5_TreeProtect.ino.cpp \
  C:\Users\xuyang\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/Arduino.h \
  C:\Users\xuyang\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/binary.h \
  C:\Users\xuyang\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino/WCharacter.h \

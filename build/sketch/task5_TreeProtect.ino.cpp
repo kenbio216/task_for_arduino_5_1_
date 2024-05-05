@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
 /*
  * @Author: xuyang
  * @Date: 2024-05-04 20:30:46
@@ -32,6 +34,13 @@ const int buzzerPin = 3;
 const int buzzerPinGND = 2;
 
 int fre;
+#line 35 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
+void setup();
+#line 57 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
+void loop();
+#line 108 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
+int readSensor();
+#line 35 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
 void setup()
 {
     pinMode(buzzerPinGND, OUTPUT);

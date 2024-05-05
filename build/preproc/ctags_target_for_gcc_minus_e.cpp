@@ -1,52 +1,125 @@
-# 1 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino"
-# 2 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino" 2
-# 3 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino" 2
-# 4 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino" 2
-# 5 "D:\\Works\\task_arduino_5_1_\\task4\\task4.ino" 2
+# 1 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
+/*
+
+ * @Author: xuyang
+
+ * @Date: 2024-05-04 20:30:46
+
+ * @LastEditors: xuyang
+
+ * @LastEditTime: 2024-05-05 14:22:12
+
+ * @FilePath: \task_for_arduino_5_1_\task5_TreeProtect\task5_TreeProtect.ino
+
+ * @Description:
+
+ *
+
+ * Copyright (c) 2024 by xuyang, All Rights Reserved
+
+ */
+# 12 "E:\\win_code_git\\task_for_arduino_5_1_\\task5_TreeProtect\\task5_TreeProtect.ino"
+/* -------------------------------------------------------------------------- */
+/*                                   烟雾传感器部分                                  */
+/* -------------------------------------------------------------------------- */
+
+float sensorValue; // variable to store sensor value
+
+/* -------------------------------- 土壤湿度传感器部分 ------------------------------- */
+
+/* Change these values based on your calibration values */
 
 
 
+const int LED1 = 13;
+const int LED2 = 12;
+
+// Sensor pins
 
 
+/* ---------------------------------- 蜂鸣器部分 --------------------------------- */
+const int buzzerPin = 3;
+const int buzzerPinGND = 2;
 
-
-Adafruit_SSD1306 display(128, 64, &Wire, 4);
-
-Servo myservo; // 创建 Servo 对象
-
-// 课表
-char list[7][20] = {"A1", "B2", "C3", "D4", "E5", "F6", "G7"};
-
+int fre;
 void setup()
 {
-  Serial.begin(9600);
-  pinMode(9 /* 超声波传感器的 trig 引脚*/, 0x1);
-  pinMode(10 /* 超声波传感器的 echo 引脚*/, 0x0);
-  myservo.attach(6 /* 舵机的控制引脚*/); // 附加舵机到指定引脚
+    pinMode(buzzerPinGND, 0x1);
+    pinMode(buzzerPin, 0x1);
+    digitalWrite(buzzerPin, 0x0);
+    digitalWrite(buzzerPinGND, 0x0);
+
+    pinMode(7, 0x1);
+    pinMode(LED1, 0x1);
+    pinMode(LED2, 0x1);
+
+    // Initially keep the sensor OFF
+    digitalWrite(7, 0x0);
+    digitalWrite(LED1, 0x0);
+    digitalWrite(LED2, 0x0);
+
+    Serial.begin(115200);
+
+    Serial.println("Gas sensor warming up!");
+    // delay(20000); // allow the MQ-6 to warm up
 }
 
-void loop() {
-  long duration, distance;
-  digitalWrite(9 /* 超声波传感器的 trig 引脚*/, 0x0); // 发送低电平信号给 trig 引脚
-  delayMicroseconds(2); // 等待2微秒
-  digitalWrite(9 /* 超声波传感器的 trig 引脚*/, 0x1); // 发送高电平信号给 trig 引脚
-  delayMicroseconds(10); // 等待10微秒
-  digitalWrite(9 /* 超声波传感器的 trig 引脚*/, 0x0); // 再次发送低电平信号给 trig 引脚
+void loop()
+{
+    /* --------------------------------- 土壤湿度传感器 -------------------------------- */
+    // get the reading from the function below and print it
+    int moisture = readSensor();
+    Serial.print("Analog Output: ");
+    Serial.println(moisture);
+    // Determine status of our soil
+    if (moisture < 500 /* Define max value we consider soil 'wet'*/)
+    {
+        Serial.println("Status: Soil is too wet");
+        digitalWrite(LED1, 0);
+        digitalWrite(LED2, 1);
+    }
+    else if (moisture >= 500 /* Define max value we consider soil 'wet'*/ && moisture < 750 /* Define min value we consider soil 'dry'*/)
+    {
+        Serial.println("Status: Soil moisture is perfect");
+        digitalWrite(LED1, 1);
+        digitalWrite(LED2, 0);
+    }
+    else
+    {
+        Serial.println("Status: Soil is too dry - time to water!");
+        digitalWrite(LED1, 1);
+        digitalWrite(LED2, 1);
+    }
+    /* ---------------------------------- 烟雾传感器 --------------------------------- */
+    sensorValue = analogRead(A2); // read analog input pin 0
 
-  duration = pulseIn(10 /* 超声波传感器的 echo 引脚*/, 0x1); // 读取 echo 引脚的脉冲宽度
-  distance = duration * 0.034 / 2; // 将脉冲宽度转换为距离（单位：厘米）
+    Serial.print("Sensor Value: ");
+    Serial.print(sensorValue);
 
-  Serial.print("Distance: ");
-  Serial.println(distance);
+    if (sensorValue > 300)
+    {
+        Serial.print(" | Smoke detected!");
+        // 频率从200到800
+        for (int i = 200; i <= 800; i++)
+        {
+            tone(7, i);
+            delay(5);
+        }
+    }
 
-  // 根据距离控制舵机位置
-  if (distance <= 10) {
-    myservo.write(0); // 将舵机转到 0 度位置
-  } else if (distance > 10 && distance <= 20) {
-    myservo.write(90); // 将舵机转到 90 度位置
-  } else {
-    myservo.write(180); // 将舵机转到 180 度位置
-  }
-
-  delay(100); // 等待一段时间后再次检测
+    Serial.println("");
+    delay(2000); // wait 2s for next reading
+                 /* ---------------------------------- 延长时间 ---------------------------------- */
+    delay(1000); // Take a reading every second for testing
+                 // Normally you should take reading perhaps once or twice a day
+    Serial.println();
+}
+//  This function returns the analog soil moisture measurement
+int readSensor()
+{
+    digitalWrite(7, 0x1); // Turn the sensor ON
+    delay(10); // Allow power to settle
+    int val = analogRead(A0); // Read the analog value form sensor
+    digitalWrite(7, 0x0); // Turn the sensor OFF
+    return val; // Return analog moisture value
 }
