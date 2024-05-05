@@ -1,16 +1,23 @@
-#include <DHT.h>
+#include <DHT.h>//dht头文件
 
 #define DHTPIN 2      // DHT传感器数据引脚连接到Arduino的数字引脚2
 #define DHTTYPE DHT11 // DHT类型为DHT11
+DHT dht(DHTPIN, DHTTYPE);
+
 #define buzzerPin 7   // 将无源蜂鸣器连接到Arduino的数字引脚 7
+
 #define FANPIN 12      // 定义风扇引脚
+
+
 int redPin = 9;       // 将红色LED连接到引脚9
 int greenPin = 10;    // 将绿色LED连接到引脚10
 int bluePin = 11;     // 将蓝色LED连接到引脚11
-DHT dht(DHTPIN, DHTTYPE);
+
 
 void setup()
-{
+{ 
+   Serial.begin(115200);
+   
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
@@ -20,7 +27,7 @@ void setup()
 
   pinMode(buzzerPin, OUTPUT); // 设置蜂鸣器引脚为输出模式
 
-  Serial.begin(115200);
+
   Serial.println("DHTxx test!");
   dht.begin();
 }

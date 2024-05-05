@@ -1,4 +1,5 @@
-#include <Servo.h>
+#include <Servo.h>//舵机头文件
+//oled头文件
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
