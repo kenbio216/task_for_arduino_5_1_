@@ -1,6 +1,0 @@
-{
-    "board": "arduino:avr:uno",
-    "sketch": "task5_TreeProtect\\task5_TreeProtect.ino",
-    "output": "./build",
-    "port": "COM5"
-}
