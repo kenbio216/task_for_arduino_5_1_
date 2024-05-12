@@ -1,79 +1,122 @@
-#include <Servo.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
 
-// 设置OLED显示屏的宽度和高度
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-#define OLED_RESET -1
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+#include <Servo.h> //舵机头文件
 
-// 创建舵机对象
-Servo myservo;
+#define trigPin 9  // 超声波传感器的 trig 引脚
+#define echoPin 10 // 超声波传感器的 echo 引脚
+int state = LOW;
+uint16_t get_distence(void)
+{
 
-// 函数指针类型定义
-typedef void (*FunctionPointer)();
+    long duration, distance;
+    digitalWrite(trigPin, LOW);  // 发送低电平信号给 trig 引脚
+    delayMicroseconds(2);        // 等待2微秒
+    digitalWrite(trigPin, HIGH); // 发送高电平信号给 trig 引脚
+    delayMicroseconds(10);       // 等待10微秒
+    digitalWrite(trigPin, LOW);  // 再次发送低电平信号给 trig 引脚
 
-// 声明两个状态函数
-void stateOne();
-void stateTwo();
+    duration = pulseIn(echoPin, HIGH); // 读取 echo 引脚的脉冲宽度
+    distance = duration * 0.034 / 2;   // 将脉冲宽度转换为距离（单位：厘米）
+    return distance;
+}
 
-// 当前状态函数指针
-FunctionPointer currentFunction = stateOne;
+#define servoPin 6 // 舵机的控制引脚
+Servo myservo;     // 创建 Servo 对象
 
-/* ---------------------------------- 定义引脚 ---------------------------------- */
+#define buttonpin 3 // 按键引脚3
+
+#define buzzerPin 8 // 将蜂鸣器连接到Arduino的数字引脚 8
+// void buzzer_ring1s()
+// {
+//     tone(buzzerPin, 1000); // 发出1000Hz的声音
+//     delay(250);            // 0.25秒
+//     noTone(buzzerPin);     // 停止发声
+//     delay(250);            // 0.25秒
+//     tone(buzzerPin, 1000); // 发出1000Hz的声音
+//     delay(250);            // 0.25秒
+//     noTone(buzzerPin);     // 停止发声
+//     delay(250);            // 0.25秒
+// }
 
 void setup()
 {
-    // 初始化OLED显示屏
-    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C))
-    {
-        for (;;)
-            ;
-    }
-    pinMode(8, OUTPUT);
-    digitalWrite(8, LOW);
+    Serial.begin(9600);
 
-    // 初始化舵机，并连接到引脚9
-    myservo.attach(10);
+    pinMode(buttonpin, INPUT_PULLUP);
 
-    // 设置初始状态函数
-    currentFunction = stateOne;
+    pinMode(trigPin, OUTPUT); // 设置超声波传感器
+    pinMode(echoPin, INPUT);
+
+    myservo.attach(servoPin); // 附加舵机到指定引脚
 }
 
 void loop()
 {
-    // 调用当前状态函数
-    currentFunction();
-}
+    Serial.print("Distance: ");
+    Serial.println(get_distence());
 
-// 第一个状态函数
-void stateOne()
-{
-    myservo.write(0);       // 舵机旋转到0度
-    display.clearDisplay(); // 清空OLED显示
-    display.display();      // 更新显示
-    noTone(6);              // 关闭蜂鸣器声音（假设连接在引脚8）
+    // 根据距离控制蜂鸣器，距离近持续6s以上蜂鸣器报警
+    if (get_distence() <= 10)
+    {
+        int Timeout = 10;
+        while (get_distence() <= 10 && Timeout >= 5)
+        {
+            Serial.print("Distance: ");
+            Serial.println(get_distence());
+            Timeout--;
+            delay(1000);
+            if (digitalRead(buttonpin) == 0)
+            {
+                noTone(buzzerPin);
+                return;
+            }
+        }
+        // 6s后蜂鸣器报警
+        if (Timeout < 5)
+        {
+            tone(buzzerPin, 1000);
+        }
+        // 如果水开不到6s
+        else
+        {
+            noTone(buzzerPin);
+            return;
+        }
+        // 按键按下蜂鸣器停止报警
+        if (digitalRead(buttonpin) == 0)
+        {
 
-    delay(5000);                // 延迟5秒
-    currentFunction = stateTwo; // 切换到第二个状态函数
-}
-
-// 第二个状态函数
-void stateTwo()
-{
-    myservo.write(180);     // 舵机旋转到180度
-    display.clearDisplay(); // 清空显示
-    display.setTextSize(1);
-    display.setTextColor(WHITE);
-    display.setCursor(0, 0);
-    display.println("one day/3 times"); // 显示第一行文本
-    display.setCursor(0, 10);
-    display.println("before dinner"); // 显示第二行文本
-    display.display();                // 更新显示
-    tone(6, 1000);                    // 蜂鸣器发声（频率1000Hz，假设连接在引脚8）
-
-    delay(5000);                // 延迟5秒
-    currentFunction = stateOne; // 切换到第一个状态函数
+            noTone(buzzerPin);
+            return;
+        }
+        // 蜂鸣器响10s后，舵机运行，蜂鸣器停止
+        while (get_distence() <= 10 && Timeout >= 0 && Timeout < 5)
+        {
+            Serial.print("Distance: ");
+            Serial.println(get_distence());
+            Timeout--;
+            delay(1000);
+            if (digitalRead(buttonpin) == 0)
+            {
+                noTone(buzzerPin);
+                return;
+            }
+        }
+        if (Timeout < 0)
+        {
+            myservo.write(180);
+            noTone(buzzerPin);
+            delay(1000);
+        }
+        // 水开不到10s
+        else if (Timeout < 5 && Timeout >= 0)
+        {
+            noTone(buzzerPin);
+        }
+    }
+    else
+    {
+        Serial.print("Distance: ");
+        Serial.println(get_distence());
+        return;
+    }
 }

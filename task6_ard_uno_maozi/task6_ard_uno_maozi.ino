@@ -1,13 +1,3 @@
-/*
- * @Author: xuyang
- * @Date: 2024-04-26 22:10:01
- * @LastEditors: xuyang
- * @LastEditTime: 2024-05-05 14:47:11
- * @FilePath: \task_for_arduino_5_1_\task6_ard_uno_maozi\task6_ard_uno_maozi.ino
- * @Description:
- *
- * Copyright (c) 2024 by xuyang, All Rights Reserved
- */
 
 #include <Servo.h>
 Servo myservo;
