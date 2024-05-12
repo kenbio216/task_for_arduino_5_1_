@@ -43,6 +43,7 @@ void loop()
     {
         myservo.write(0); // 将舵机转到 0 度位置
         tone(buzzerPin, 1000);
+        delay(5000);
     }
     else
     {

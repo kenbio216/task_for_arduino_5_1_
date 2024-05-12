@@ -10,12 +10,12 @@ const int beepPinGND = 4; // 定义蜂鸣器引脚
 
 void sweep() // 让舵机旋转
 {
-    for (pos = 0; pos <= 180; pos += 1)
+    for (pos = 0; pos <= 90; pos += 1)
     {
         myservo.write(pos);
         delay(15);
     }
-    for (pos = 180; pos >= 0; pos -= 1)
+    for (pos = 90; pos >= 0; pos -= 1)
     {
         myservo.write(pos);
         delay(15);
