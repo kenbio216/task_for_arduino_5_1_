@@ -29,7 +29,7 @@ Servo myservo;     // 创建 Servo 对象
 
 
 // 课表
-char list[7][20] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}; 
+char list[7][20] = {"text1", "text2", "text3", "text4", "text5", "text6", "text7"}; 
 #define OLED_RESET 4
 Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
 #define oled_line1 0
@@ -45,13 +45,11 @@ void oled_showlist(int index)
     display.clearDisplay();           // 清屏
     display.setTextSize(2);           // 设置字体大小
     display.setCursor(0, oled_line1); // 设置显示位置
-    display.println("-NameList-");
+    display.println("ClassList:");
     display.setCursor(0, oled_line2); // 设置显示位置
     display.println(list[index]);
     display.display(); // 开显示
 }
-
-
 
 #define BUTTON 3                       // 定义按键
 volatile boolean debounceFlag = false; // 去抖标志位
@@ -112,12 +110,9 @@ void loop()
     {
         myservo.write(0); // 将舵机转到 0 度位置
     }
-    else if (get_distence() > 10 && get_distence() <= 20)
+    else if (get_distence() > 10)
     {
         myservo.write(90); // 将舵机转到 90 度位置
     }
-    else
-    {
-        myservo.write(180); // 将舵机转到 180 度位置
-    }
 }
+
