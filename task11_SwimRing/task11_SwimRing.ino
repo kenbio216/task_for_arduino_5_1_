@@ -3,6 +3,12 @@
 #define controlvccpin 9                     //定义开关vcc线
 #define ledpin 13                     //定义板载LED
 
+//模式切换按钮
+
+//报警按钮
+
+//蜂鸣器
+
 void setup()
 {
     Serial.begin(115200);
