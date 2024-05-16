@@ -5,7 +5,9 @@
 // 值日表
 char list[7][20] = {"A1", "B2", "C3", "D4", "E5", "F6", "G7"};
 
-#define BUTTON 3                       // 定义按键
+#define BUTTON 3     // 定义按键
+#define BUTTON_GND 6 // 定义按键地端
+
 volatile boolean debounceFlag = false; // 去抖标志位
 volatile int i = 0;
 volatile int flag = 1;
@@ -13,7 +15,7 @@ volatile unsigned long lastInterruptTime = 0;
 void change()
 {
   unsigned long currentInterruptTime = millis();
-  // 检查上次中断以来是否已经过了足够的时间（例如 50 毫秒），以避免误触发
+  // 检查上次中断以来是否已经过了足够的时间（例如 300 毫秒），以避免误触发
   if (currentInterruptTime - lastInterruptTime > 300)
   {
     debounceFlag = true;                      // 设置去抖标志位
@@ -30,7 +32,6 @@ void change()
     }
   }
 }
-
 
 #define OLED_RESET 4
 #define OLED_VCC 13
@@ -55,9 +56,9 @@ void oled_showlist(int index)
   display.display(); // 开显示
 }
 
+#define buzzerPin 8     // 蜂鸣器信号
+#define buzzergndPin 11 // 蜂鸣器地端
 
-
-#define buzzerPin 8 // 将蜂鸣器连接到Arduino的数字引脚 8
 void buzzer_ring1s()
 {
   tone(buzzerPin, 1000); // 发出1000Hz的声音
@@ -77,8 +78,13 @@ void setup()
   pinMode(OLED_VCC, OUTPUT);
   digitalWrite(OLED_VCC, HIGH);
 
+  pinMode(buzzergndPin, OUTPUT);
+  digitalWrite(buzzergndPin, LOW);
+
   pinMode(BUTTON, INPUT_PULLUP);
   attachInterrupt(1, change, RISING); // 上升沿触发中断1，调用change函数
+  pinMode(BUTTON_GND, OUTPUT);
+  digitalWrite(BUTTON_GND, LOW);
 
   pinMode(buzzerPin, OUTPUT); // 设置蜂鸣器引脚为输出模式
 }
@@ -96,7 +102,7 @@ void loop()
   // 蜂鸣器每隔30s报时喝水
   unsigned long buzzer_currenttime = millis(); //
   Serial.println(buzzer_currenttime);
-  if (buzzer_currenttime % (1*30*1000) == 0)
+  if (buzzer_currenttime % (1 * 30 * 1000) == 0)
   {
     buzzer_ring1s();
   }
