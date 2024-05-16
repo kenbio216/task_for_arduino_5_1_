@@ -93,7 +93,7 @@ void loop()
     debounceFlag = false; // 重置去抖标志位
   }
 
-  // 蜂鸣器每隔两分钟报时喝水
+  // 蜂鸣器每隔30s报时喝水
   unsigned long buzzer_currenttime = millis(); //
   Serial.println(buzzer_currenttime);
   if (buzzer_currenttime % (1*30*1000) == 0)
