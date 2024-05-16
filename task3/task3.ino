@@ -33,6 +33,8 @@ void change()
 
 
 #define OLED_RESET 4
+#define OLED_VCC 13
+
 Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
 #define oled_line1 0
 #define oled_line2 16
@@ -71,6 +73,9 @@ void buzzer_ring1s()
 void setup()
 {
   Serial.begin(115200);
+
+  pinMode(OLED_VCC, OUTPUT);
+  digitalWrite(OLED_VCC, HIGH);
 
   pinMode(BUTTON, INPUT_PULLUP);
   attachInterrupt(1, change, RISING); // 上升沿触发中断1，调用change函数
