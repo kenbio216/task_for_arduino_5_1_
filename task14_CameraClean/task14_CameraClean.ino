@@ -53,7 +53,7 @@ void loop()
     Serial.println(get_distence());
 
     // 根据距离控制蜂鸣器，距离近蜂鸣器报警，且舵机转动打掉遮挡物
-    if (get_distence() <= 20)
+    if (get_distence() <= 10)
     {
         myservo.write(180); // 舵机旋转
         buzzer_ring05s();
