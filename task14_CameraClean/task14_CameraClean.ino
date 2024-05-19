@@ -19,10 +19,11 @@ uint16_t get_distence(void)
     return distance;
 }
 
-#define servoPin 6 // 舵机的控制引脚
+#define servoPin 11 // 舵机的控制引脚
 Servo myservo;     // 创建 Servo 对象
 
-#define buzzerPin 8 // 将蜂鸣器连接到Arduino的数字引脚 8
+#define buzzerPin 7 // 将蜂鸣器连接到Arduino的数字引脚 8
+#define buzzergndPin 4 // 将蜂鸣器连接到Arduino的数字引脚 
 void buzzer_ring05s()
 {
     tone(buzzerPin, 1000); // 发出1000Hz的声音
@@ -36,6 +37,9 @@ void setup()
     Serial.begin(9600);
 
     pinMode(buzzerPin, OUTPUT); // 设置蜂鸣器
+    pinMode(buzzergndPin, OUTPUT); // 设置蜂鸣器
+    digitalWrite(buzzergndPin, LOW);
+    
 
     pinMode(trigPin, OUTPUT); // 设置超声波传感器
     pinMode(echoPin, INPUT);
