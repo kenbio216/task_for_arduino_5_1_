@@ -23,7 +23,7 @@ Servo myservo;     // 创建 Servo 对象
 
 #define buttonpin 3 // 按键引脚3
 
-#define buzzerPin 13    // 蜂鸣器
+#define buzzerPin 13   // 蜂鸣器
 #define buzzergndPin 6 // 蜂鸣器地端
 
 // void buzzer_ring05s()
@@ -93,36 +93,35 @@ void loop()
             return;
         }
         // // 蜂鸣器响10s后，舵机运行，蜂鸣器停止
-        // while (get_distence() <= 10 && Timeout >= 0 && Timeout < 5)
-        // {
-        //     Serial.print("Distance: ");
-        //     Serial.println(get_distence());
-        //     Timeout--;
-        //     delay(1000);
-        //     if (digitalRead(buttonpin) == !lastbutton)
-        //     {
-        //         lastbutton = digitalRead(buttonpin);
-        //         noTone(buzzerPin);
-        //         return;
-        //     }
-        // }
-        // if (Timeout < 0)
-        // {
-        //     myservo.write(180);
-        //     noTone(buzzerPin);
-        //     delay(1000);
-        // }
+        while (get_distence() <= 10 && Timeout >= 0 && Timeout < 5)
+        {
+            Serial.print("Distance: ");
+            Serial.println(get_distence());
+            Timeout--;
+            delay(1000);
+            if (digitalRead(buttonpin) == !lastbutton)
+            {
+                lastbutton = digitalRead(buttonpin);
+                noTone(buzzerPin);
+                return;
+            }
+        }
+        if (Timeout < 0)
+        {
+            myservo.write(180);
+            noTone(buzzerPin);
+            delay(1000);
+        }
         // 水开不到10s
-        //     else if (Timeout < 5 && Timeout >= 0)
-        //     {
-        //         noTone(buzzerPin);
-        //     }
-        // }
-        // else
-        // {
-        //     Serial.print("Distance: ");
-        //     Serial.println(get_distence());
-        //     return;
-        // }
+        else if (Timeout < 5 && Timeout >= 0)
+        {
+            noTone(buzzerPin);
+        }
+    }
+    else
+    {
+        Serial.print("Distance: ");
+        Serial.println(get_distence());
+        return;
     }
 }
