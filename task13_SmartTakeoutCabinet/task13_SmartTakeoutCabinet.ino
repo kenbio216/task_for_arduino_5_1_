@@ -1,10 +1,19 @@
-
 #include <Servo.h> //舵机头文件
+#define servoPin 7 // 舵机的控制引脚
+Servo myservo;     // 创建 Servo 对象
+int posClosed = 0; // 关闭时舵机位置
+int posOpen = 90;  // 开启时舵机位置
+void openDoor()
+{
+    myservo.write(posOpen);
+    delay(2000);              // 开门延迟
+    myservo.write(posClosed); // 关门
+}
 
-#define trigPin 9  // 超声波传感器的 trig 引脚
-#define echoPin 10 // 超声波传感器的 echo 引脚
-int state = LOW;
-uint16_t get_distence(void)
+#define trigPin 5           // 超声波传感器的 trig 引脚
+#define echoPin 6           // 超声波传感器的 echo 引脚
+#define gndPin 4            // 超声波传感器的 gnd 引脚
+uint16_t get_distence(void) // 获得距离
 {
 
     long duration, distance;
@@ -19,34 +28,74 @@ uint16_t get_distence(void)
     return distance;
 }
 
-#define servoPin 6 // 舵机的控制引脚
-Servo myservo;     // 创建 Servo 对象
 
-#define buttonpin 3 // 按键引脚3
 
-#define buzzerPin 8 // 将蜂鸣器连接到Arduino的数字引脚 8
-// void buzzer_ring1s()
-// {
-//     tone(buzzerPin, 1000); // 发出1000Hz的声音
-//     delay(250);            // 0.25秒
-//     noTone(buzzerPin);     // 停止发声
-//     delay(250);            // 0.25秒
-//     tone(buzzerPin, 1000); // 发出1000Hz的声音
-//     delay(250);            // 0.25秒
-//     noTone(buzzerPin);     // 停止发声
-//     delay(250);            // 0.25秒
-// }
+#define buzzerPin 3    // 蜂鸣器
+#define buzzergndPin 2 // 蜂鸣器地端
+void buzzer_ring1s()   // 蜂鸣器鸣叫1s
+{
+    tone(buzzerPin, 1000); // 发出1000Hz的声音
+    delay(250);            // 0.25秒
+    noTone(buzzerPin);     // 停止发声
+    delay(250);            // 0.25秒
+    tone(buzzerPin, 1000); // 发出1000Hz的声音
+    delay(250);            // 0.25秒
+    noTone(buzzerPin);     // 停止发声
+    delay(250);            // 0.25秒
+}
 
+/*------------------------------------------------密码输入----------------------------------------*/
+#define buttonPin1 8      // 1按键引脚
+#define buttonPin2 9      // 2按键引脚
+#define buttonPin3 10     // 3按键引脚
+#define buttonPin4 11     // 4按键引脚
+#define enterbuttonPin 12 // 确认按键引脚
+
+bool buttonState1 = 0; // 第一个按键状态
+bool buttonState2 = 0; // 第二个按键状态
+bool buttonState3 = 0; // 第三个按键状态
+bool buttonState4 = 0; // 第四个按键状态
+bool enterbuttonState; // 确认按键状态
+
+int correctPassword[] = {1, 1, 1, 1}; // 正确密码
+int enteredPassword[4];               // 用户输入的密码
+
+int attempts = 0; // 尝试次数
+
+bool checkPassword() // 检查密码是否正确
+{
+    for (int i = 0; i < 4; i++)
+    {
+        if (enteredPassword[i] != correctPassword[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+/*---------------------------------------主函数-----------------------------------------------------*/
 void setup()
 {
     Serial.begin(9600);
 
-    pinMode(buttonpin, INPUT_PULLUP);
-
     pinMode(trigPin, OUTPUT); // 设置超声波传感器
     pinMode(echoPin, INPUT);
+    pinMode(gndPin, OUTPUT);
+    digitalWrite(gndPin, LOW);
 
     myservo.attach(servoPin); // 附加舵机到指定引脚
+    myservo.write(posOpen);        // 默认为开门状态
+
+    pinMode(buzzerPin, OUTPUT); // 设置蜂鸣器
+    pinMode(buzzergndPin, OUTPUT);
+    digitalWrite(buzzergndPin, LOW);
+
+    pinMode(buttonPin1, INPUT_PULLUP); // 设置按键
+    pinMode(buttonPin2, INPUT_PULLUP);
+    pinMode(buttonPin3, INPUT_PULLUP);
+    pinMode(buttonPin4, INPUT_PULLUP);
+    pinMode(enterbuttonPin, INPUT_PULLUP);
+    enterbuttonState = digitalRead(enterbuttonPin);
 }
 
 void loop()
@@ -54,69 +103,59 @@ void loop()
     Serial.print("Distance: ");
     Serial.println(get_distence());
 
-    // 根据距离控制蜂鸣器，距离近持续6s以上蜂鸣器报警
+    // 根据距离控制蜂鸣器，距离近持续3s以上蜂鸣器报警
     if (get_distence() <= 10)
     {
-        int Timeout = 10;
-        while (get_distence() <= 10 && Timeout >= 5)
+        int Timeout = 3;
+        while (get_distence() <= 10 && Timeout > 0)
         {
             Serial.print("Distance: ");
             Serial.println(get_distence());
             Timeout--;
             delay(1000);
-            if (digitalRead(buttonpin) == 0)
+        }
+        // 3s后舵机转动关门，蜂鸣器报警3s
+        if (Timeout == 0)
+        {
+            myservo.write(posClosed);
+            for (int i = 0; i < 3; i++)
             {
-                noTone(buzzerPin);
-                return;
+                buzzer_ring1s();
             }
-        }
-        // 6s后蜂鸣器报警
-        if (Timeout < 5)
-        {
-            tone(buzzerPin, 1000);
-        }
-        // 如果水开不到6s
-        else
-        {
-            noTone(buzzerPin);
-            return;
-        }
-        // 按键按下蜂鸣器停止报警
-        if (digitalRead(buttonpin) == 0)
-        {
-
-            noTone(buzzerPin);
-            return;
-        }
-        // 蜂鸣器响10s后，舵机运行，蜂鸣器停止
-        while (get_distence() <= 10 && Timeout >= 0 && Timeout < 5)
-        {
-            Serial.print("Distance: ");
-            Serial.println(get_distence());
-            Timeout--;
-            delay(1000);
-            if (digitalRead(buttonpin) == 0)
-            {
-                noTone(buzzerPin);
-                return;
-            }
-        }
-        if (Timeout < 0)
-        {
-            myservo.write(180);
-            noTone(buzzerPin);
-            delay(1000);
-        }
-        // 水开不到10s
-        else if (Timeout < 5 && Timeout >= 0)
-        {
-            noTone(buzzerPin);
         }
     }
-    else
+
+    // 读取按键状态
+    buttonState1 = digitalRead(buttonPin1);
+    buttonState2 = digitalRead(buttonPin2);
+    buttonState3 = digitalRead(buttonPin3);
+    buttonState4 = digitalRead(buttonPin4);
+
+    // 保存用户输入的密码
+    enteredPassword[0] = buttonState1;
+    enteredPassword[1] = buttonState2;
+    enteredPassword[2] = buttonState3;
+    enteredPassword[3] = buttonState4;
+
+    // 按下enter检查密码是否正确
+    if (digitalRead(enterbuttonPin) != enterbuttonState)
     {
-        Serial.print("Distance: ");
-        Serial.println(get_distence());
-        return;
+        if (checkPassword())
+        {
+            openDoor();
+        }
+        else
+        {
+            attempts++;
+            Serial.print("Attempt is ");
+            Serial.println(attempts);
+            if (attempts >= 3)
+            {
+                buzzer_ring1s();
+                buzzer_ring1s();
+                buzzer_ring1s();
+                attempts = 0;
+            }
+        }
     }
 }
