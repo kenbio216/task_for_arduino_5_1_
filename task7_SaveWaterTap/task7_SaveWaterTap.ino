@@ -24,7 +24,7 @@ Servo myservo;     // 创建 Servo 对象
 #define buttonpin 3 // 按键引脚3
 
 #define buzzerPin 13   // 蜂鸣器
-#define buzzergndPin 6 // 蜂鸣器地端
+#define buzzergndPin 8 // 蜂鸣器地端
 
 // void buzzer_ring05s()
 // {
@@ -50,6 +50,7 @@ void setup()
     digitalWrite(buzzergndPin, LOW);
 
     myservo.attach(servoPin); // 附加舵机到指定引脚
+    myservo.write(90);
 }
 
 void loop()
@@ -60,22 +61,22 @@ void loop()
     // 根据距离控制蜂鸣器，距离近持续6s以上蜂鸣器报警
     if (get_distence() <= 10)
     {
-        int Timeout = 5;
-        while (get_distence() <= 10 && Timeout > 0)
+        int Timeout = 10;
+        while (get_distence() <= 10 && Timeout > 5)
         {
             Serial.print("Distance: ");
             Serial.println(get_distence());
             Timeout--;
-            delay(1000);
             if (digitalRead(buttonpin) == !lastbutton)
             {
                 lastbutton = digitalRead(buttonpin);
                 noTone(buzzerPin);
                 return;
             }
+            delay(1000);
         }
         // 6s后蜂鸣器报警
-        if (Timeout <= 0)
+        if (Timeout <= 5)
         {
             tone(buzzerPin, 1000);
         }
@@ -93,7 +94,7 @@ void loop()
             return;
         }
         // // 蜂鸣器响10s后，舵机运行，蜂鸣器停止
-        while (get_distence() <= 10 && Timeout >= 0 && Timeout < 5)
+        while (get_distence() <= 10 && Timeout >= 0 && Timeout <= 5)
         {
             Serial.print("Distance: ");
             Serial.println(get_distence());
@@ -110,7 +111,8 @@ void loop()
         {
             myservo.write(180);
             noTone(buzzerPin);
-            delay(1000);
+            delay(2000);
+            myservo.write(90);
         }
         // 水开不到10s
         else if (Timeout < 5 && Timeout >= 0)
