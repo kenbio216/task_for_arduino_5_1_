@@ -24,6 +24,9 @@ const int buzzerPinGND = 2;
 int fre;
 void setup()
 {
+    pinMode(8, OUTPUT);
+    digitalWrite(8, HIGH); // 充当VCC
+
     pinMode(buzzerPinGND, OUTPUT);
     pinMode(buzzerPin, OUTPUT);
     digitalWrite(buzzerPin, LOW);
@@ -76,22 +79,22 @@ void loop()
     Serial.print("Sensor Value: ");
     Serial.print(sensorValue);
 
-    if (sensorValue > 300)
+    if (sensorValue > 500)
     {
         Serial.print(" | Smoke detected!");
         // 频率从200到800
         for (int i = 200; i <= 800; i++)
         {
-            tone(7, i);
+            tone(buzzerPin, i);
             delay(5);
         }
     }
 
     Serial.println("");
-    delay(2000); // wait 2s for next reading
-                 /* ---------------------------------- 延长时间 ---------------------------------- */
-    delay(1000); // Take a reading every second for testing
-                 // Normally you should take reading perhaps once or twice a day
+    delay(500); // wait 2s for next reading
+                /* ---------------------------------- 延长时间 ---------------------------------- */
+    delay(100); // Take a reading every second for testing
+                // Normally you should take reading perhaps once or twice a day
     Serial.println();
 }
 //  This function returns the analog soil moisture measurement
